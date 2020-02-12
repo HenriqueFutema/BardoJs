@@ -29,9 +29,23 @@ class Bardo{
     }
 
     controller(model, name=""){
-        this.router.get('/', async (req, res) => {
-            const test = await model.find()
-            return res.json(test)
+        this.router.get(`/${name}`, async (req, res) => {
+            const data = await model.find()
+            return res.json(data)
+        })
+        this.router.post(`/${name}`, async (req, res) => {
+            const data = await model.create(req.body)
+            return res.json(data)
+        })
+        this.router.put(`/${name}/:id`, async (req, res) => {
+            const { id } = req.params
+            const data = await model.findByIdAndUpdate(id, req.body, {new: true})
+            return res.json(data)
+        })
+        this.router.delete(`/${name}/:id`, async (req, res) => {
+            const { id } = req.params
+            const data = await model.findByIdAndRemove(id)
+            return res.json(data)
         })
         this.app.use(this.router)
     }
