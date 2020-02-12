@@ -24,6 +24,7 @@ class Bardo{
     }
 
     model(schema=[], name=""){
+        typeof(schema) !== Object && console.log("schema is not a Object");
         const _schema = mongoose.Schema(schema)
         return this.controller(mongoose.model(name, schema), name)
     }
@@ -52,6 +53,7 @@ class Bardo{
             return res.json(data)
         })
         this.app.use(this.router)
+        console.log(this.router)
     }
 
 
