@@ -33,6 +33,10 @@ class Bardo{
             const data = await model.find()
             return res.json(data)
         })
+        this.router.get(`/${name}/:id`, async (req, res) => {
+            const data = await model.findById(id)
+            return res.json(data)
+        })
         this.router.post(`/${name}`, async (req, res) => {
             const data = await model.create(req.body)
             return res.json(data)
